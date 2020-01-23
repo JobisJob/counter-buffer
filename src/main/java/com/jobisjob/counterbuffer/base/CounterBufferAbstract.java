@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.base;
+package com.jobisjob.counterbuffer.base;
 
 
 import java.util.Date;
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.jobisjob.CounterBuffer.exception.FlushException;
+import com.jobisjob.counterbuffer.exception.FlushException;
 import com.jobisjob.executor.DefaultNamedThreadFactory;
 
 

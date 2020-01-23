@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.exception;
+package com.jobisjob.counterbuffer.exception;
 
 public class FlushException extends Exception {
 

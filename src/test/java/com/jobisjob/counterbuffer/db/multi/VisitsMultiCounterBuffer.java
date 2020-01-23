@@ -1,14 +1,14 @@
-package com.jobisjob.CounterBuffer.db.multi;
+package com.jobisjob.counterbuffer.db.multi;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
-import com.jobisjob.CounterBuffer.exception.FlushException;
-import com.jobisjob.CounterBuffer.multi.CounterBufferMultiDataSource;
-import com.jobisjob.CounterBuffer.multi.CounterMulti;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
+import com.jobisjob.counterbuffer.exception.FlushException;
+import com.jobisjob.counterbuffer.multi.CounterBufferMultiDataSource;
+import com.jobisjob.counterbuffer.multi.CounterMulti;
 
 public class VisitsMultiCounterBuffer extends CounterBufferMultiDataSource {
 

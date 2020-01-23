@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer;
+package com.jobisjob.counterbuffer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

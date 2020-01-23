@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.db.single;
+package com.jobisjob.counterbuffer.db.single;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -16,7 +16,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.jobisjob.CounterBuffer.H2Utils;
+import com.jobisjob.counterbuffer.H2Utils;
 
 
 public class CounterBufferSingleDBTest {

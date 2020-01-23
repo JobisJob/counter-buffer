@@ -1,7 +1,7 @@
-package com.jobisjob.CounterBuffer.multi;
+package com.jobisjob.counterbuffer.multi;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
-import com.jobisjob.CounterBuffer.base.CounterBufferAbstract;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
+import com.jobisjob.counterbuffer.base.CounterBufferAbstract;
 
 /**
  * Write Buffer to increment purpose

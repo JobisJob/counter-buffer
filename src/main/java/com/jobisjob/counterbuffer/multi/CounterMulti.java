@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.multi;
+package com.jobisjob.counterbuffer.multi;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
-import com.jobisjob.CounterBuffer.single.CounterSingle;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
 
 /**
  * Base counter class<p>
  * This class has a key and a set of counters. <br>
  * This is useful then for one object we need many counters, for example counting different actions on the same item. <p>
- * To increment the counter calling {@link CounterSingle#increment(field, int)}
+ * To increment the counter calling {@link #increment(Comparable, int)}
  */
 public class CounterMulti extends CounterAbstract implements Comparable<CounterMulti>{
     private Map<Comparable,AtomicInteger> counts = new HashMap<Comparable, AtomicInteger>(); 

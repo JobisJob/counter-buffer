@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.single;
+package com.jobisjob.counterbuffer.single;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,11 +7,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
 
 /**
  * Base counter class<p>
- * This class has a key and a counter, so we can put the name of the counter in the key and increment the counter calling {@link CounterSingle#increment(int)}
+ * This class has a key and a counter, so we can put the name of the counter in the key and increment the counter calling {@link com.jobisjob.counterbuffer.single.CounterSingle#increment(int)}
  */
 public class CounterSingle extends CounterAbstract implements Comparable<CounterSingle>{
 	protected Log log = LogFactory.getLog(CounterSingle.class);

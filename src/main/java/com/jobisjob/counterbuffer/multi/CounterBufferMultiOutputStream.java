@@ -1,10 +1,10 @@
-package com.jobisjob.CounterBuffer.multi;
+package com.jobisjob.counterbuffer.multi;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
-import com.jobisjob.CounterBuffer.exception.FlushException;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
+import com.jobisjob.counterbuffer.exception.FlushException;
 
 
 /**

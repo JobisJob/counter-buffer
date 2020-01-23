@@ -1,14 +1,14 @@
-package com.jobisjob.CounterBuffer.db.single;
+package com.jobisjob.counterbuffer.db.single;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import com.jobisjob.CounterBuffer.base.CounterAbstract;
-import com.jobisjob.CounterBuffer.exception.FlushException;
-import com.jobisjob.CounterBuffer.single.CounterBufferSingleDataSource;
-import com.jobisjob.CounterBuffer.single.CounterSingle;
+import com.jobisjob.counterbuffer.base.CounterAbstract;
+import com.jobisjob.counterbuffer.exception.FlushException;
+import com.jobisjob.counterbuffer.single.CounterBufferSingleDataSource;
+import com.jobisjob.counterbuffer.single.CounterSingle;
 
 public class VisitsSingleCounterBuffer extends CounterBufferSingleDataSource {
 

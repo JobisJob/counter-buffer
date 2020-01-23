@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.base;
+package com.jobisjob.counterbuffer.base;
 
 /** In this abstract class the actual counter is not defined, it will be defined in the children classes. <p>
  * Here we just define the Key of the cache as a {@link Comparable}

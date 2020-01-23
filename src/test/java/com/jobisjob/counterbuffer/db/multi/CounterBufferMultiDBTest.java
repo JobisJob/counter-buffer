@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.db.multi;
+package com.jobisjob.counterbuffer.db.multi;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +15,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.jobisjob.CounterBuffer.H2Utils;
+import com.jobisjob.counterbuffer.H2Utils;
 
 
 public class CounterBufferMultiDBTest {

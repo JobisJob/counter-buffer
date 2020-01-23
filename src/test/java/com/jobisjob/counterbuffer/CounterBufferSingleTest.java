@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer;
+package com.jobisjob.counterbuffer;
 
 import static org.junit.Assert.assertNotEquals;
 
@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import com.jobisjob.CounterBuffer.single.CounterBufferSingleOutputStream;
+import com.jobisjob.counterbuffer.single.CounterBufferSingleOutputStream;
 
 import junit.framework.TestCase;
 

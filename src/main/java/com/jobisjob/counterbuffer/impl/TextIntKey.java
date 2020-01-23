@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.impl;
+package com.jobisjob.counterbuffer.impl;
 
 public class TextIntKey implements Comparable<TextIntKey> {
 

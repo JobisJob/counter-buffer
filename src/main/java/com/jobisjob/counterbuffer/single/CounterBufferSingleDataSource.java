@@ -1,4 +1,4 @@
-package com.jobisjob.CounterBuffer.multi;
+package com.jobisjob.counterbuffer.single;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 
-public abstract class CounterBufferMultiDataSource extends CounterBufferMulti<CounterMulti> {
+
+public abstract class CounterBufferSingleDataSource extends CounterBufferSingle<CounterSingle> {
 
     private DataSource dataSource;
     
@@ -16,7 +17,7 @@ public abstract class CounterBufferMultiDataSource extends CounterBufferMulti<Co
 	
 	
     
-    public CounterBufferMultiDataSource(int maxSize, long maxTimeInSeconds, DataSource dataSource) {
+    public CounterBufferSingleDataSource(int maxSize, long maxTimeInSeconds, DataSource dataSource) {
         super(maxSize, maxTimeInSeconds);
         this.dataSource = dataSource;
     }
@@ -25,7 +26,7 @@ public abstract class CounterBufferMultiDataSource extends CounterBufferMulti<Co
     
     protected void closeConnection(){
         try {
-        	if(connection != null){
+        	if(connection != null && !connection.isClosed()){
         		connection.close();
         		connection = null;
         	}
@@ -36,8 +37,9 @@ public abstract class CounterBufferMultiDataSource extends CounterBufferMulti<Co
     
     @Override
     public void afterFlush() {
-        dao = null;
-        closeConnection();
+    	closeConnection();
+    	dao = null;
+        
     }
     
     
