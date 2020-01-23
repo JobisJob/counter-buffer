@@ -7,10 +7,13 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.jobisjob.CounterBuffer.base.CounterAbstract;
+import com.jobisjob.CounterBuffer.single.CounterSingle;
 
 /**
- * Base class to the HitBuffer <br>
- * 
+ * Base counter class<p>
+ * This class has a key and a set of counters. <br>
+ * This is useful then for one object we need many counters, for example counting different actions on the same item. <p>
+ * To increment the counter calling {@link CounterSingle#increment(field, int)}
  */
 public class CounterMulti extends CounterAbstract implements Comparable<CounterMulti>{
     private Map<Comparable,AtomicInteger> counts = new HashMap<Comparable, AtomicInteger>(); 
@@ -18,7 +21,7 @@ public class CounterMulti extends CounterAbstract implements Comparable<CounterM
     public CounterMulti(Comparable bufferKey) {
         super(bufferKey);
     }
-
+    
     public void increment(Comparable field, int value) {
     	AtomicInteger count = counts.get(field);
         if ( count == null){

@@ -27,6 +27,11 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
 	protected Log log = LogFactory.getLog(CounterBufferAbstract.class);
 	protected static final long OVERFLOW_SLEEP_MILLIS = 10;
     
+	/* level (or percentage) of activation/deactivation of the flush thread */
+    public static float highThresholdDefault = 0.9f;
+    public static float lowThresholdDefault = 0.8f;
+
+    
 	/** set to thue to stop the flush loop */
     protected boolean stopThread = false;
 
@@ -73,19 +78,26 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
     	return map.get(bufferKey);
     }
     
-	
-    public CounterBufferAbstract(int maxSize, long maxTimeInSeconds) {
+    public CounterBufferAbstract(int maxSize, long maxTimeInSeconds, float highThreshold, float lowThreshold) {
         this.maxSize = maxSize;
-        this.maxTime = maxTimeInSeconds*1000;
+        this.maxTime = maxTimeInSeconds * 1000;
         
-        flushTriggerOn = Math.max(1,(int) (maxSize * 0.9f));
-        flushTriggerOff = Math.max(1,(int) (maxSize * 0.8f));
+        if (highThreshold < 0 && highThreshold > 1){
+        	highThreshold = highThresholdDefault;
+        }
+        
+        if (lowThreshold < 0 && lowThreshold > 1){
+        	lowThreshold = lowThresholdDefault;
+        }
+        
+        flushTriggerOn = Math.max(1,(int) (maxSize * highThreshold));
+        flushTriggerOff = Math.max(1,(int) (maxSize * lowThreshold));
 
         // ShutdownHook
         shutdownThread = new ShutMeDownThread();
         Runtime.getRuntime().addShutdownHook(shutdownThread);
         
-        
+        /* thread for the flush automatic */
         ThreadFactory threadFactory = new DefaultNamedThreadFactory( this.getClass().getSimpleName() );
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(threadFactory);
         
@@ -93,6 +105,10 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
         		maxTimeInSeconds, maxTimeInSeconds, TimeUnit.SECONDS);
         
     } 
+    
+    public CounterBufferAbstract(int maxSize, long maxTimeInSeconds) {
+    	this(maxSize, maxTimeInSeconds, highThresholdDefault, lowThresholdDefault);
+    }
     
     private class ShutMeDownThread extends Thread{
         public void run() {

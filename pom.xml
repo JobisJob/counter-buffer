@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jobisjob</groupId>
 	<artifactId>counter-buffer</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	
 	<name>Counter Buffer</name>
     <description>Buffered counters for Java</description>
