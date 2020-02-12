@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import com.jobisjob.counterbuffer.base.CounterBufferAbstract;
 import com.jobisjob.counterbuffer.single.CounterBufferSingleOutputStream;
 
 import junit.framework.TestCase;
@@ -28,6 +29,8 @@ public class CounterBufferSingleTest extends TestCase{
 		hbos.increment( "alpha", 1 );
 		hbos.increment( "beta", 1 );
 		
+		System.out.println( " *** " + CounterBufferAbstract.getTotalBufferSize()  );
+		
 		Thread.sleep( 2100 );
 		
 		log.info( hbos.getStats() );
@@ -36,7 +39,18 @@ public class CounterBufferSingleTest extends TestCase{
 		log.info( "buffer to string: " + baos.toString() );
 		assertEquals( "alpha:1\n" + "beta:1\n", baos.toString() );
 		
+		assertEquals( 1, CounterBufferAbstract.instanceRegistry.size() );
 		
+//		CounterBufferAbstract.instanceRegistry.forEach( (p) -> {
+//			System.out.println(" ** " + p.getClass().getSimpleName() + " " + p.getSize() );
+//		});
+//			
+//		System.out.println( " ***" + CounterBufferAbstract.getInstanceAndSize()  );
+//		
+		
+		hbos.close();
+		
+		assertEquals( 0, CounterBufferAbstract.instanceRegistry.size() );
 		
 		
 	}

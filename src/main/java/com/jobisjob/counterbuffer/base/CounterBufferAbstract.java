@@ -2,6 +2,7 @@ package com.jobisjob.counterbuffer.base;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +27,8 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
 	
 	protected Log log = LogFactory.getLog(CounterBufferAbstract.class);
 	protected static final long OVERFLOW_SLEEP_MILLIS = 10;
+	
+	public static ConcurrentLinkedQueue<CounterBufferAbstract> instanceRegistry = new ConcurrentLinkedQueue<CounterBufferAbstract>();
     
 	/* level (or percentage) of activation/deactivation of the flush thread */
     public static float highThresholdDefault = 0.9f;
@@ -79,6 +82,9 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
     }
     
     public CounterBufferAbstract(int maxSize, long maxTimeInSeconds, float highThreshold, float lowThreshold) {
+    	
+    	instanceRegistry.add( this );
+    	
         this.maxSize = maxSize;
         this.maxTime = maxTimeInSeconds * 1000;
         
@@ -105,6 +111,22 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
         		maxTimeInSeconds, maxTimeInSeconds, TimeUnit.SECONDS);
         
     } 
+    
+    public static Map<String, Integer> getInstanceAndSize(){
+    	
+    	HashMap<String, Integer> result = new HashMap<>(); 
+    	
+		CounterBufferAbstract.instanceRegistry.forEach( (p) -> {
+			result.put( p.getClass().getSimpleName(), p.getSize() );
+			
+		});
+		return result;
+		
+    }
+    
+    public static int getTotalBufferSize(){
+		return CounterBufferAbstract.instanceRegistry.stream().mapToInt( p -> p.getSize() ).sum();
+    }
     
     public CounterBufferAbstract(int maxSize, long maxTimeInSeconds) {
     	this(maxSize, maxTimeInSeconds, highThresholdDefault, lowThresholdDefault);
@@ -207,6 +229,11 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
         }
     }
 
+    
+    public void close(){
+    	flushAll();
+    }
+    
     /**
      * Write all items 
      * 
@@ -246,6 +273,7 @@ public abstract class CounterBufferAbstract<E extends CounterAbstract> implement
 			
 		}
         
+    	instanceRegistry.remove( this );
     }
 	
 	/**
