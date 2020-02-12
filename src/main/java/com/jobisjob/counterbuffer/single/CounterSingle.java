@@ -28,7 +28,6 @@ public class CounterSingle extends CounterAbstract implements Comparable<Counter
 	@Override
 	public void increment( Comparable field, int value ) {
 		increment( value );
-		log.error( "In a " + getClass().getCanonicalName() + " is been called a method of a Multi incrementer" );
 	}
 	
     public int getCount() {
