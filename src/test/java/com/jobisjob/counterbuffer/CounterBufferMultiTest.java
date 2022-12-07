@@ -10,7 +10,6 @@ import com.jobisjob.counterbuffer.multi.CounterBufferMultiOutputStream;
 
 import junit.framework.TestCase;
 
-/* CounterBufferMultiTest */
 public class CounterBufferMultiTest extends TestCase{
 
 	protected Log log = LogFactory.getLog( CounterBufferSingleTest.class );
