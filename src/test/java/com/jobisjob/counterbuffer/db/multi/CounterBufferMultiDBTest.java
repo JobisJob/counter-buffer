@@ -48,20 +48,21 @@ public class CounterBufferMultiDBTest {
 	public void test() throws SQLException {
 		VisitsMultiCounterBuffer visitsBuffer = new VisitsMultiCounterBuffer( 5, 1, dataSource );
 		
-		visitsBuffer.increment( "firstPage", "impression", 1 );
-		visitsBuffer.increment( "firstPage", "impression", 1 );
-		visitsBuffer.increment( "firstPage", "view", 1 );
-		visitsBuffer.increment( "firstPage", "impression", 1 );
-		visitsBuffer.increment( "firstPage", "click", 1 );
-		visitsBuffer.increment( "secondPage", "impression", 1);
-		visitsBuffer.increment( "secondPage", "view", 1);
-		visitsBuffer.increment( "firstPage", "view", 1 );
-		visitsBuffer.increment( "secondPage", "impression", 1);
+		visitsBuffer.increment( "firstItem", "impression", 1 );
+		visitsBuffer.increment( "firstItem", "impression", 1 );
+		visitsBuffer.increment( "firstItem", "view", 1 );
+		visitsBuffer.increment( "firstItem", "impression", 1 );
+		visitsBuffer.increment( "firstItem", "click", 1 );
+		visitsBuffer.increment( "secondItem", "impression", 1);
+		visitsBuffer.increment( "secondItem", "view", 1);
+		visitsBuffer.increment( "firstItem", "view", 1 );
+		visitsBuffer.increment( "secondItem", "impression", 1);
 		
 		
 		try {
 			Thread.sleep( 1200 );
 		} catch (InterruptedException e) {
+			// DO NOTHING
 		}
 		
 		
@@ -79,9 +80,9 @@ public class CounterBufferMultiDBTest {
 					" click: " + rs.getInt( "click" ) ) ;
 
 			final String name = rs.getString( "name" );
-			if ("firstPage".equals( name )){
+			if ("firstItem".equals( name )){
 				assertEquals( 3, rs.getInt( "impression" ) );
-			}else if ("secondPage".equals( name )){
+			}else if ("secondItem".equals( name )){
 				assertEquals( 1, rs.getInt( "view" ) );
 			}else{
 				fail();

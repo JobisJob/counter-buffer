@@ -34,13 +34,13 @@ public class CounterBufferSingleDBTest {
 		dataSource = JdbcConnectionPool.create("jdbc:h2:~/visits;DB_CLOSE_ON_EXIT=FALSE;mode=MySQL", "sa", "sa");
 		
 		// create table
-		H2Utils.exec(dataSource, "create table visits(name varchar(255) primary key, count int )" );
+		H2Utils.exec(dataSource, "create table names(name varchar(255) primary key, count int )" );
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		// truncate table
-		H2Utils.exec(dataSource, "truncate table visits" );
+		H2Utils.exec(dataSource, "truncate table names" );
 		
 	}
 
@@ -49,12 +49,12 @@ public class CounterBufferSingleDBTest {
 	public void test() throws SQLException {
 		
 		// create the counterBuffer with size 5 and 1 second of buffer life 
-		VisitsSingleCounterBuffer visitsBuffer = new VisitsSingleCounterBuffer( 5, 1, dataSource );
+		CountingNamesCounterBuffer visitsBuffer = new CountingNamesCounterBuffer( 5, 1, dataSource );
 		
 		// use it 
-		visitsBuffer.increment( "firstPage" );
-		visitsBuffer.increment( "secondPage");
-		visitsBuffer.increment( "firstPage" );
+		visitsBuffer.increment( "George" );
+		visitsBuffer.increment( "Arthur");
+		visitsBuffer.increment( "George" );
 		
 		// wait for the automatic flush
 		try {
@@ -67,16 +67,16 @@ public class CounterBufferSingleDBTest {
 		Statement stat = conn.createStatement();
 		
 		ResultSet rs;
-        rs = stat.executeQuery("select * from visits");
+        rs = stat.executeQuery("select * from names");
         
         System.out.println( "----- DB table content -----" );
 		while (rs.next()) {
 			System.out.println( "name: " + rs.getString( "name" ) + " count: " + rs.getInt( "count" ) );
 
 			final String name = rs.getString( "name" );
-			if ("firstPage".equals( name )){
+			if ("George".equals( name )){
 				assertEquals( 2, rs.getInt( "count" ) );
-			}else if ("secondPage".equals( name )){
+			}else if ("Arthur".equals( name )){
 				assertEquals( 1, rs.getInt( "count" ) );
 			}else{
 				fail();

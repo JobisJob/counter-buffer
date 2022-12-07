@@ -10,9 +10,9 @@ import com.jobisjob.counterbuffer.exception.FlushException;
 import com.jobisjob.counterbuffer.single.CounterBufferSingleDataSource;
 import com.jobisjob.counterbuffer.single.CounterSingle;
 
-public class VisitsSingleCounterBuffer extends CounterBufferSingleDataSource {
+public class CountingNamesCounterBuffer extends CounterBufferSingleDataSource {
 
-	public VisitsSingleCounterBuffer(int maxSize, long maxTimeInSeconds, DataSource dataSource) {
+	public CountingNamesCounterBuffer(int maxSize, long maxTimeInSeconds, DataSource dataSource) {
 		super( maxSize, maxTimeInSeconds, dataSource );
 	}
 
@@ -24,7 +24,7 @@ public class VisitsSingleCounterBuffer extends CounterBufferSingleDataSource {
 			
 			Statement stat = getConnection().createStatement();
 			try{
-				stat.execute("insert into visits "
+				stat.execute("insert into names "
 						+ "values('" + myItem.getId() + "', " + myItem.getCount() + ") "
 						+ "on duplicate key update count=count+" +  myItem.getCount()
 						);
